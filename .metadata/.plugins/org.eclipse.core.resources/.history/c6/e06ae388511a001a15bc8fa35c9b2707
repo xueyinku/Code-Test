@@ -1,0 +1,76 @@
+package com.xue.study.DataArray;
+
+import java.util.Arrays;
+
+public class Array {
+	private int[] data;//data数组
+	private int size; //数组中存放的有效数据个数
+
+	// 构造方法，该方法是用户需要多少容量的数组就定义多大的数组 (capacity = input)
+	public Array(int capacity) { 
+		data = new int[capacity];
+		size = 0;
+	}
+	//无参数构造方法，初始化为10个长度的数组(capacity = 10)
+	public Array() { 
+		this(10);
+	}
+	
+	public Array(int...num ) { 
+		data = new int[num.length];
+		int j = 0;
+		for (int i : num) {
+			data[j] = i;
+			j++;
+		}
+		size = num.length;
+	}
+	//获取数组元素个数
+	public int getSize() {
+		return size;
+	}
+	
+	//获取数组容量
+	public int getCapacity() {
+		return data.length;
+	}
+	
+	//数组是否为空
+	public boolean isEmpty() {
+		return size == 0;
+	}
+	
+	//数组开头插入数据element
+	public void addFirst(int element) {
+		add(0, element);
+	}
+	
+	//数组index位置插入数据element
+		public void add(int index, int element) {
+			//数组已满，抛出异常
+			if (size == data.length) 
+				throw new IllegalArgumentException("add fail Array is full");
+			//输入索引超出数组容量，抛出异常
+			if (index < 0 || index > size) 
+				throw new IllegalArgumentException("add fail require index > 0 && index < size");
+			for (int i = size; i >= index; i--)
+				data[i] = data[i-1];
+			data[index] = element;
+			size++;
+		}
+	
+	//数组末尾添加元素element
+	public void addLast(int element) {
+		if (size == data.length) 
+			throw new IllegalArgumentException("add fail Array is full");
+		data[size] = element;
+		size++; 
+	}
+	
+	
+	@Override
+	public String toString() {
+		return "Array [data=" + Arrays.toString(data) + "]";
+	}
+
+}

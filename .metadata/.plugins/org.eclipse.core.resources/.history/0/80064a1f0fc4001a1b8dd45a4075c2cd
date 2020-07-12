@@ -1,0 +1,14 @@
+package com.xue.service.Impl;
+
+import com.xue.model.BookPageMes;
+import com.xue.service.BookService;
+
+public class BookServiceImpl implements BookService{
+
+	@Override
+	public BookPageMes findBookByPage(int id, String name, int currentPage) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -1,0 +1,25 @@
+
+public class Test {
+
+	public static void main(String[] args) {
+		char a = 'a';
+		char b = 'b';
+		Double c = 12.2;
+		int dsdsa = 10;
+		System.out.println(20.12);
+		System.out.println(a);
+		if (dsdsa == 10) {
+			System.out.println("success");
+		}
+		
+		for (int as = 0; as <= dsdsa; as += 2) {
+			if (as == 2) {
+				break;
+			} else {
+				System.out.println(as);
+			
+			}
+		}
+		
+	}
+}

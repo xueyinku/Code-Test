@@ -1,0 +1,5 @@
+package com.xue.dao;
+
+public interface BookDao {
+
+}

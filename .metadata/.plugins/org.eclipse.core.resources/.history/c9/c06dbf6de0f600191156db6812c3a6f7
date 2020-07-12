@@ -1,0 +1,38 @@
+package com.asjy.customer.service.impl;
+
+import java.util.List;
+
+import com.asjy.customer.dao.CustomerDao;
+import com.asjy.customer.model.Customer;
+import com.asjy.customer.service.CustomerService;
+
+public class CustomerServiceImpl implements CustomerService{
+
+	@Override
+	public boolean insertCustomer(Customer customer) {
+		// TODO 编写添加的SQL语句
+		String sql = "insert into tbl_customer values(?, ?, ?, ?, ?)";
+		// 调用dao中的封装的方法，连接数据库
+		return CustomerDao.update(sql, customer.getId(), customer.getName(), customer.getScore(), customer.getTel(), customer.getSex());
+	}
+
+	@Override
+	public boolean deleteCustomer(int id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean updateCustomer(Customer customer) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<Customer> findCustomer() {
+		// TODO 编写全查询语句
+		String sql = "select * from tbl_customer";
+		return CustomerDao.query(sql);
+	}
+
+}

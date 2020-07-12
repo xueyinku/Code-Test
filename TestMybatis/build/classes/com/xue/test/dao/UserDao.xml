@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xue.test.dao.UserDao">
+<!-- 所有Mybatis代理的代码写在Mapper标签中 
+	namespace属性：代表命名空间（映射代理接口）（写的代理接口的全类名：包名+类名 ）
+	-->
+	<insert id="insert" parameterType="com.xue.test.model.User">
+<!-- 	id代表的是映射接口中的对应方法，方法名
+		parameterType 映射对应方法的参数类型(全类名)如果是intstring之类的，直接写不需要写包名 -->
+	insert into users values(default,#{name},#{password},#{type})
+<!-- 	Mybatis写sql语句，用#{占位符赋值内容}当作占位符
+		注意：当参数是实体类对象时，需要靠对象的成员变量给占位符赋值，大括号只需要些实体类的成员变量名即可 -->
+	</insert>
+	<update id="update" parameterType="com.xue.test.model.User">
+	update users set user_name = #{name}, password = #{password} where user_id = #{id}
+	</update>
+	<delete id="delete" parameterType="int">
+<!-- 	注意！当参数是对象是，#{对象的成员变量名称}
+		如果参数是单一数据类型（整数小数字符串。。。）,#{}中任意写
+		官方建议，用一个单词代替value -->
+		delete from users
+		where user_id = #{value}
+	</delete>
+	<select id="selectAll" resultType="com.xue.test.model.User">
+<!-- 	parameterType可以不指定，但是selct语句中必须制定resulttype
+		resultType属性：映射方法的返回值类型（增删改没有这个属性，但是查询必须写这个属性）
+		单查询时返回值类型是集合时，resultType只需要写集合中所装的数据类型即可 -->
+		select 
+			user_id id,
+			user_name name,
+			password,
+			user_type type
+		from users
+<!-- 	注意：由于查询语句需要将查询的结果放在对象中，必须保证查询的字段名和成员变量名一致，才能够装值
+			这时就想到了sql中as 可以改变查询结果的列明， as可省略 -->
+	</select>
+	<select id="selectDynamic" resultType="com.xue.test.model.User">
+		select 
+			user_id id,
+			user_name name,
+			password,
+			user_type type
+		from users
+		<where>
+			<if test="id != 0">
+			user_id = #{id}
+			</if>
+			<if test="name != null and name != ''">
+			and user_name like "%" #{name} "%"
+			</if>
+			<if test="password != null and password != ''">
+			and password like "%" #{password} "%"
+			</if>
+		</where>
+	</select>
+</mapper>

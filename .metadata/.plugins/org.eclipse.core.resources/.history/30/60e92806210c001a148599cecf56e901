@@ -1,0 +1,10 @@
+
+public class Test {
+
+	public static void main(String[] args) {
+		char a = 'a';
+		char b = 'b';
+		double c = 12.2;
+		System.out.println(0.3 == c);
+	}
+}

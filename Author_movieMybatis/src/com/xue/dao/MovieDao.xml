@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xue.dao.MovieDao">
+	<resultMap type="com.xue.model.Movie" id="movAndAct">
+		<result column="mov" property="id" />
+		<result column="movie_name" property="name" />
+		<result column="movie_type" property="type" />
+		<result column="movie_money" property="money" />
+		<collection property="allActors" ofType="com.xue.model.Actor">
+<!-- 		ofType标签，关联的集合实体类中所装数据的类型 -->
+			<result column="actor_id" property="id" />
+			<result column="actor_name" property="name" />
+			<result column="actor_sex" property="sex" />
+			<result column="act" property="actMOvie" />
+		</collection>
+	</resultMap>
+	<select id="selectMoviesByName" resultMap="movAndAct">
+		select
+			movie.movie_id mov,
+			movie_name,
+			movie_type,
+			movie_money,
+			actor_id,
+			actor_name,
+			actor_sex,
+			actor.movie_id act
+		from movie 
+		inner join actor 
+		on movie.movie_id = actor.movie_id 
+		<where>
+			movie_name like "%" #{value} "%"		
+		</where>
+	</select>
+</mapper>

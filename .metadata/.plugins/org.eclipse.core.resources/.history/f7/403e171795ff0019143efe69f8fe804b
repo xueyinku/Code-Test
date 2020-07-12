@@ -1,0 +1,10 @@
+package xom.xue.book.dao;
+
+import com.xue.book.model.Book;
+
+public interface BookDao1 {
+	int insert(Book book);//Ôö¼Ó
+	int update(Book book);
+	int delete(int no);
+	int 
+}

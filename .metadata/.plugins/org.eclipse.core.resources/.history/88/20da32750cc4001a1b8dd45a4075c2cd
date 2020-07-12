@@ -1,0 +1,10 @@
+package com.xue.dao;
+
+import java.util.List;
+
+import com.xue.model.Book;
+
+public interface BookDao {
+	List<Book> findBookDynamic(int id,String name,int strat,int end);
+
+}

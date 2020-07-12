@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Author_movieMybatis/src/com/xue/dao/ProjectDaoxml.xml&apos; to &apos;ProjectDao.xml&apos;" description="Rename resource &apos;ProjectDaoxml.xml&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/com/xue/dao/ProjectDaoxml.xml" name="ProjectDao.xml" stamp="1573008967294" updateReferences="true"/>
+</session>

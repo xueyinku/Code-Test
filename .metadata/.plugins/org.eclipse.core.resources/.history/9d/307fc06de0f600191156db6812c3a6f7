@@ -1,0 +1,22 @@
+package com.asjy.customer.service;
+
+import java.util.List;
+
+import com.asjy.customer.model.Customer;
+
+public interface CustomerService {
+
+	//一次性定义项目中所能用到的所有功能！
+	//增
+	boolean insertCustomer(Customer customer);
+	
+	//删
+	boolean deleteCustomer(int id);
+	
+	//改
+	boolean updateCustomer(Customer customer);
+	
+	//全查询
+	List<Customer> findCustomer();
+	
+}

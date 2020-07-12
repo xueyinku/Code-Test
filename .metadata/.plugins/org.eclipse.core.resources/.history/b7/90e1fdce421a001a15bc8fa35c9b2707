@@ -1,0 +1,12 @@
+package com.xue.study.DataArray;
+
+public class Array {
+	private int[] data;//数组
+	private int size; //数组中存放的有效数据个数
+	
+	
+	public void capacity(int cap) {  // 该方法是用户需要多少容量的数组
+		data = new int[cap];
+		size = 0;
+	}
+}

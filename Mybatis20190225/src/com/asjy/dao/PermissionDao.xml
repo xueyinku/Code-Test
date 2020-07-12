@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.asjy.dao.PermissionDao">
+	<resultMap type="com.asjy.model.Permission" id="permission">
+		<result column="majorPermissionName" property="name"/>
+		<collection property="minorList" ofType="com.asjy.model.Permission">
+			<result column="minorPermissionName" property="name"/>
+			<result column="minorPermissionUrl" property="url"/>
+		</collection>
+	</resultMap>
+	
+	<select id="findPermissionByUserId" resultMap="permission">
+		select
+			minor.permission_name minorPermissionName,
+			major.permission_name majorPermissionName,
+			minor.permission_url minorPermissionUrl
+		from tbl_permission as major		
+		inner join tbl_permission as minor
+		on minor.parent_id = major.permission_id
+		inner join tbl_userpermission
+		on minor.permission_id = tbl_userpermission.permission_id
+		inner join tbl_user
+		on tbl_user.user_id = tbl_userpermission.user_id
+		<where>
+			<if test="userId != 0">
+				tbl_user.user_id = #{userId}
+			</if>
+		</where>
+	</select>
+</mapper>

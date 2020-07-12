@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xue.dao.ActorDao">
+	<resultMap type="com.xue.model.Actor" id="actAndMov">
+<!-- 	resultmap标签：作用是，将查询的数据库字段和对应实体类成员变量一一映射，等价于起别名
+		type属性：等价于之前的resultType属性
+		id属性：识别resultMap标签，不允许重复
+ -->
+	<result column="actor_id" property="id"/>
+	<!-- 	result标签：作用是，作用是将一个字段和一个实体类成员变量映射
+		column属性：对应的sql语句查询的字段名
+		property属性：对应实体类成员变量名称
+ -->
+	<result column="actor_name" property="name"/>
+	<result column="actor_sex" property="sex"/>
+	<result column="act" property="actMOvie"/>
+	<association property="moviemes" javaType="com.xue.model.Movie">
+	<!-- 	association标签：作用是，完成一对一关系映射的标签
+		property属性：对应的赋值的对象类型
+		javaTyoe属性：对象所属的类型
+ -->
+	<result column="mov" property="id"/>
+	<result column="movie_name" property="name"/>
+	<result column="movie_type" property="type"/>
+	<result column="movie_money" property="money"/>
+	</association>
+	</resultMap>
+
+
+	<select id="selectByName" resultMap="actAndMov">
+		select 
+			actor_id,
+			actor_name,
+			actor_sex,
+			actor.movie_id act,
+			movie.movie_id mov,
+			movie_name,
+			movie_type,
+			movie_money
+		from actor 
+		inner join movie 
+		on 	actor.movie_id = movie.movie_id 
+		<where>
+		actor_name like "%" #{value} "%"
+		</where>
+	</select> 
+		
+
+
+
+</mapper>

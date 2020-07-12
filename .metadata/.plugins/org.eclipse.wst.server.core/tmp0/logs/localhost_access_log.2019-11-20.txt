@@ -1,0 +1,6 @@
+127.0.0.1 - - [20/Nov/2019:11:09:52 +0800] "GET / HTTP/1.1" 404 1044
+127.0.0.1 - - [20/Nov/2019:11:10:09 +0800] "GET /SSM/entry.jsp HTTP/1.1" 200 359
+127.0.0.1 - - [20/Nov/2019:11:10:20 +0800] "POST /SSM/UserController/goindex HTTP/1.1" 200 1894
+127.0.0.1 - - [20/Nov/2019:11:10:20 +0800] "GET /SSM/js/jquery-1.11.2.js HTTP/1.1" 200 284469
+127.0.0.1 - - [20/Nov/2019:11:10:22 +0800] "GET /SpringMVCAndMybatis/BookController/goinsert HTTP/1.1" 404 1095
+127.0.0.1 - - [20/Nov/2019:11:10:29 +0800] "POST /SSM/BookController/ajaxDeleteManyNo HTTP/1.1" 404 1018

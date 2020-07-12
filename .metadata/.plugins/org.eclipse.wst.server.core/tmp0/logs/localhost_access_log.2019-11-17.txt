@@ -1,0 +1,15 @@
+127.0.0.1 - - [17/Nov/2019:14:58:17 +0800] "GET / HTTP/1.1" 404 1044
+127.0.0.1 - - [17/Nov/2019:14:58:21 +0800] "GET /SSM/entry.jsp HTTP/1.1" 200 276
+127.0.0.1 - - [17/Nov/2019:15:41:15 +0800] "GET / HTTP/1.1" 404 1044
+127.0.0.1 - - [17/Nov/2019:15:41:18 +0800] "GET /SSM/entry.jsp HTTP/1.1" 200 343
+0:0:0:0:0:0:0:1 - - [17/Nov/2019:15:41:49 +0800] "GET /SSM/entry.jsp HTTP/1.1" 200 358
+0:0:0:0:0:0:0:1 - - [17/Nov/2019:15:41:50 +0800] "GET /favicon.ico HTTP/1.1" 404 1055
+0:0:0:0:0:0:0:1 - - [17/Nov/2019:15:41:56 +0800] "POST /SSM/UserController/goindex HTTP/1.1" 500 12133
+0:0:0:0:0:0:0:1 - - [17/Nov/2019:15:42:36 +0800] "GET /SSM/entry.jsp HTTP/1.1" 200 359
+0:0:0:0:0:0:0:1 - - [17/Nov/2019:15:42:39 +0800] "POST /SSM/UserController/goindex HTTP/1.1" 500 12133
+0:0:0:0:0:0:0:1 - - [17/Nov/2019:15:42:54 +0800] "GET /SSM/entry.jsp HTTP/1.1" 200 359
+0:0:0:0:0:0:0:1 - - [17/Nov/2019:15:42:58 +0800] "POST /SSM/UserController/goindex HTTP/1.1" 200 359
+0:0:0:0:0:0:0:1 - - [17/Nov/2019:15:46:49 +0800] "POST /SSM/UserController/goindex HTTP/1.1" 200 1894
+0:0:0:0:0:0:0:1 - - [17/Nov/2019:15:46:49 +0800] "GET /SSM/js/jquery-1.11.2.js HTTP/1.1" 200 284469
+0:0:0:0:0:0:0:1 - - [17/Nov/2019:15:47:00 +0800] "POST /SSM/UserController/goindex HTTP/1.1" 200 359
+0:0:0:0:0:0:0:1 - - [17/Nov/2019:15:47:03 +0800] "POST /SSM/UserController/goindex HTTP/1.1" 200 359

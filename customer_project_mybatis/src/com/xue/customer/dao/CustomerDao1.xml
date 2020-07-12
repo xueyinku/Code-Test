@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xue.customer.dao.CustomerDao1">
+	<insert id="insertCustomer">
+		insert into
+		 	tbl_customer
+		values(#{id}, #{name}, #{score},#{tel},#{sex})
+	</insert>
+	<update id="updateCustomer">
+		update tbl_customer set
+		 customer_name =  #{name},
+		 customer_score = #{score},
+		 customer_tel = #{tel},
+		 customer_sex = #{sex} 
+		 where customer_id = #{id}
+	</update>
+	<delete id="deleteCustomer">
+		delete from tbl_customer where customer_id = #{value}
+	</delete>
+	<select id="selectCustomerById" resultType="com.xue.custom.model.Customer">
+		select 
+			customer_id id,
+			customer_name name,
+			customer_score score,
+			customer_tel tel,
+			customer_sex sex 
+			from tbl_customer where customer_id = #{value}
+	</select>
+	<select id="selectCustomerDynamic" resultType="com.xue.custom.model.Customer">
+		select 
+			customer_id id,
+			customer_name name,
+			customer_score score,
+			customer_tel tel,
+			customer_sex sex 
+			from tbl_customer 
+			<where>
+			<if test="id != null and id != ''">
+				customer_id like "%" #{id} "%"
+			</if>
+			<if test="id != null and id != ''">
+				and customer_tel like "%" #{tel} "%"
+			</if>
+			</where>
+			
+	</select>
+</mapper>

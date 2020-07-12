@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<servers>
+  <server auto-publish-setting="2" auto-publish-time="1" configuration-id="/Servers/Tomcat v9.0 Server at localhost-config" deployDir="wtpwebapps" hostname="localhost" id="Tomcat v9.0 Server at localhost" name="Tomcat v9.0 Server at localhost" runtime-id="Apache Tomcat v9.0" server-type="org.eclipse.jst.server.tomcat.90" server-type-id="org.eclipse.jst.server.tomcat.90" start-timeout="450" stop-timeout="15" testEnvironment="true" timestamp="33">
+    <list key="modules" value0="文件上传Demo::org.eclipse.jst.jee.server:文件上传Demo::jst.web::3.1" value1="SSM::org.eclipse.jst.jee.server:SSM::jst.web::4.0" value2="book_project::org.eclipse.jst.jee.server:book_project::jst.web::3.1" value3="JavaEE1024::org.eclipse.jst.jee.server:JavaEE1024::jst.web::3.1" value4="cloud_project::org.eclipse.jst.jee.server:cloud_project::jst.web::3.1" value5="excelIO::org.eclipse.jst.jee.server:excelIO::jst.web::3.1" value6="Mybatis20200712::org.eclipse.jst.jee.server:Mybatis20200712::jst.web::4.0"/>
+  </server>
+</servers>

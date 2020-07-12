@@ -1,0 +1,8 @@
+package com.xue.dao;
+
+import com.xue.model.Student;
+
+public interface StudentDao {
+
+	Student findStuAndTea( );
+}

@@ -1,0 +1,20 @@
+package com.xue.servlet;
+
+import java.util.List;
+
+import com.xue.model.Student;
+import com.xue.service.StudentService;
+import com.xue.service.Impl.StudentServiceImpl;
+
+public class TestStudent {
+	public static void main(String[] args) {
+		StudentService ss1 = new StudentServiceImpl();
+		List<Student> list = ss1.findStuAndTea();
+		for (Student student : list) {
+			System.out.println("学生姓名:" + student.getName());
+			
+			System.out.println("老师姓名" + student.getTeacher().getName());
+		}
+	}
+
+}

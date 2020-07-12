@@ -1,0 +1,56 @@
+.txtlogin{
+	width: 100px;
+	height: 30px;
+	text-align: center;
+}
+.textlogin{
+	width: 200px;
+	height: 30px;
+	
+}
+
+.submitall{
+	width: 200px;
+	height: 30px;
+	background-color: #3385ff;
+	border: 1px solid #2d78f4;
+	color: #fff;
+	text-align: center;
+	border-radius: 8px;
+	
+}
+
+.txtregist{
+	width: 80px;
+	height: 30px;
+	text-align: left;
+}
+.txtredregist{
+	width: 150px;
+	height: 30px;
+	text-align: left;
+	color: red;
+}
+.textlogin1{
+	width: 200px;
+	height: 30px;
+}
+.textlogin2{
+	width: 150px;
+	height: 30px;
+}
+.submitregist{
+	width: 50px;
+	height: 30px;
+	background-color: #3385ff;
+	border: 1px solid #2d78f4;
+	color: #fff;
+	text-align: center;
+	border-radius: 8px;
+	
+}
+#textlogin3{
+	width: 200px;
+	height: 30px;
+	background-color: #A9A9A9;
+}

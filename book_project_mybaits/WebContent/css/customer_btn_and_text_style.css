@@ -1,0 +1,64 @@
+.txtlogin{  //文字居中
+	width: 100px;
+	height: 30px;
+	text-align: center;
+}
+.textlogin{ //中间输入text格式
+	width: 200px;
+	height: 30px;
+	margin: 10px;
+}
+
+.submitall{  //sub按钮
+	width: 60px;
+	height: 30px;
+	background-color: #3385ff;
+	border: 1px solid #2d78f4;
+	color: #fff;
+	text-align: center;
+	border-radius: 8px;
+	/*margin: 10px;*/
+}
+
+.txtregist{
+	width: 80px;
+	height: 30px;
+	text-align: left;
+}
+.txtredregist{
+	width: 150px;
+	height: 30px;
+	text-align: left;
+	color: red;
+}
+.textlogin1{
+	width: 200px;
+	height: 30px;
+}
+.textlogin2{
+	width: 150px;
+	height: 30px;
+}
+.submitregist{
+	width: 200px;
+	height: 30px;
+	background-color: #3385ff;
+	border: 1px solid #2d78f4;
+	color: #fff;
+	text-align: center;
+	letter-spacing: 10px;
+	border-radius: 8px;
+	
+}
+#textlogin3{
+	width: 200px;
+	height: 30px;
+	background-color: #A9A9A9;
+}
+.td{
+	width: 220px;
+}
+.imgconfirm{
+	width: 100px;
+	height: 30px;
+}

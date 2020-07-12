@@ -1,0 +1,55 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>项目云平台注册页面</h1>
+	<hr />
+	<c:if test="${alert != null}">${alert}</c:if>
+	<form action="UserServlet" method="post" onsubmit="confirmmes()" >
+	<table>
+	<tr>
+		<td>账号</td>
+		<td><input type="text" name="name"/></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>密码</td>
+		<td><input type="password" id="password" name="password"/></td>
+		<td><span></span></td>
+	</tr>
+	<tr>
+		<td>确认密码</td>
+		<td><input type="password" id="passwordconfirm" name="password_con" onblur="confirmmes()"/></td>
+		<td><span id="con_pas_mes"></span></td>
+	</tr>
+	<tr>
+		<td></td>
+		<input type="hidden"  value="goregister" name="flag"/>
+		<td><input type="submit" value="立即注册" /></td>
+		<td></td>
+	</tr>
+	</table>
+	</form>
+</body>
+<script type="text/javascript" src="js/jquery-1.11.2.js"></script>
+<script>
+	function confirmmes() {
+		if ($("#password").val() != ""  && $("#password").val() ==  $("#passwordconfirm").val()) {
+			$("#con_pas_mes").html("正确");
+			$("#con_pas_mes").prop("style" , "color : green");
+			return true;
+		} else if ($("#password").val() != ""  && $("#password").val() !=  $("#passwordconfirm").val()) {
+			$("#con_pas_mes").html("两次输入不一致");
+			$("#con_pas_mes").prop("style" , "color : red");
+			return false;
+		}
+	}
+	
+</script>
+</html>

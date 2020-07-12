@@ -1,0 +1,337 @@
+package com.xue.book.servlet;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.xue.book.model.Book;
+import com.xue.book.model.BookPageMes;
+import com.xue.book.service.BookService;
+import com.xue.book.serviceImpl.BookServiceImpl;
+
+/**
+ * Servlet implementation class BookServlet
+ */
+@WebServlet("/BookServlet")
+public class BookServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public BookServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO 接flag，判断之后在调到相应页面
+		String flag = request.getParameter("flag");
+		if ("goinsert".equals(flag)) {
+			doGoinsert(request,response);
+		} else if ("goindex_manager".equals(flag)) {
+			doIndexManager(request,response);
+		} else if ("goindex_user".equals(flag)) {
+			doIndexUser(request, response);
+		} else if ("gotoupdate".equals(flag)) {
+			doUpdate(request, response);//跳转到修改页面，
+		} else if ("gotodelete".equals(flag)) {
+			doDeleteBook(request, response);
+		} else if ("gobuy".equals(flag)) {
+			dobuy(request, response);
+		} 
+	}
+
+	private void dobuy(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO 跳转到购买画面 1.接到书名
+		String name = request.getParameter("book_name");
+		System.out.println(name);
+		//根据书名查出book对象
+		BookService bs = new BookServiceImpl();
+		Book book = bs.seleteByName(name);
+		request.setAttribute("book", book);
+		request.getRequestDispatcher("book_buy.jsp").forward(request, response);
+	}
+
+	private void doDeleteBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO 1接取jsp的值，
+		String bookno = request.getParameter("bookno");
+		//将值传到delete画面面
+		request.setAttribute("no", bookno);
+		request.getRequestDispatcher("book_delete.jsp").forward(request, response);
+	}
+
+	private void doUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {//跳转到修改页面
+		// TODO 1接取jsp的值，
+		String bookno = request.getParameter("bookno");
+		//根据bookno在数据库中查询到book对象，给updatejsp文件传递值
+		BookService bs = new BookServiceImpl();
+		Book book = bs.seleteByno(Integer.parseInt(bookno));
+		System.out.println(book);
+		request.setAttribute("book", book);
+		//将值传递到book_update.jsp页面
+		request.getRequestDispatcher("book_update.jsp").forward(request, response);
+	}
+
+	private void doGoinsert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO 转到insert页面
+		request.getRequestDispatcher("book_insert.jsp").forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO 接收登陆之后是进入哪个系统，并展示信息
+		request.setCharacterEncoding("UTF-8");
+		String flag = request.getParameter("flag");
+		if ("goindex_manager".equals(flag)) {
+			doIndexManager(request,response);
+		} else if ("goindex_user".equals(flag)) {
+			doIndexUser(request,response);
+		} else if ("goinsertok".equals(flag)) {
+			doInsertBook(request,response);
+		} else if ("goupdateok".equals(flag)) {
+			//根据jsp数据，去ssql修改book信息，并返回首页
+			doupdateok(request,response);
+		} else if ("godeleteok".equals(flag)) {
+			//根据jsp数据，去ssql删除book信息，并返回首页
+			doupdeleteok(request,response);
+		} else if ("gobuyok".equals(flag)) {
+			//根据jsp数据，查询数量是否小于该数量，小于修改store，返回首页，大于的话返回buy给提示
+			dobuyok(request,response);
+		}
+	}
+
+	private void dobuyok(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO 根据jsp数据，查询数量是否小于该数量，小于修改store，返回首页，大于的话返回buy给提示
+		//接取name和store
+		String name = request.getParameter("name");
+		String count = request.getParameter("store");
+		//根据那么查询数量
+		BookService bs = new BookServiceImpl();
+		Book book = bs.seleteByName(name);
+		if (book.getStore() >= Integer.parseInt(count)) {  //大于，就去sql中store减去count
+			boolean result = bs.buyBook(book.getNo(), book.getStore() - Integer.parseInt(count));
+			if (result) {  //修改完sql数据，返回首页
+				doIndexUser(request,response);
+			} else {
+				System.out.println("数据库删除失败");
+				request.getRequestDispatcher("book_buy.jsp").forward(request, response);
+			}
+		} else {
+			request.setAttribute("book", book);
+			String alert = "sorry，书内量不足";
+			request.setAttribute("alert", alert);
+			request.getRequestDispatcher("book_buy.jsp").forward(request, response);
+		}
+		
+	}
+
+	private void doupdeleteok(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO //根据jsp数据，去ssql删除book信息，并返回首页
+		String no = request.getParameter("no");
+		//创建service，调用方法删除信息
+		BookService bs = new BookServiceImpl();
+		boolean result = bs.delete(Integer.parseInt(no));
+		if (result) {
+			doIndexManager(request,response);
+		} else {
+			String alert = "信息删除失败";
+			request.setAttribute("alert", alert);
+			request.getRequestDispatcher("book_update.jsp").forward(request, response);
+		}
+	}
+
+	private void doupdateok(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO 接取jsp数据
+		String no = request.getParameter("no");
+		String name = request.getParameter("name");
+		String author = request.getParameter("author");
+		String publish = request.getParameter("publish");
+		String price = request.getParameter("price");
+		String store = request.getParameter("store");
+		//创建对象，装这些信息
+		Book book = new Book();
+		book.setNo(Integer.parseInt(no));
+		book.setName(name);
+		book.setAuthor(author);
+		book.setPublish(publish);
+		book.setPrice(Double.parseDouble(price));
+		book.setStore(Integer.parseInt(store));
+		//条用服务成方法
+		BookService bs = new BookServiceImpl();
+		boolean result = bs.update(book); //成功跳到管理首页
+		if (result) {
+			doIndexManager(request,response);
+		} else { //否则返回update画面
+			String alert = "信息修改失败";
+			request.setAttribute("alert", alert);
+			request.getRequestDispatcher("book_update.jsp").forward(request, response);
+		}
+	}
+
+	private void doInsertBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO gei数据库增加数据，并返回首页，入过增加失败返回本页
+		String no = request.getParameter("no");
+		String name = request.getParameter("name");
+		String author = request.getParameter("author");
+		String publish = request.getParameter("publish");
+		String price = request.getParameter("price");
+		String store = request.getParameter("store");
+		//新建book对象，
+		Book book = new Book();
+		book.setNo(Integer.parseInt(no));
+		book.setName(name);
+		book.setAuthor(author);
+		book.setPublish(publish);
+		book.setPrice(Double.parseDouble(price));
+		book.setStore(Integer.parseInt(store));
+		//调用方法
+		BookService bookService = new BookServiceImpl();
+		boolean result = bookService.insert(book);
+		if (result) {
+//			// TODO 查询所有图书数据信息 返回管理端
+//			BookService bs = new BookServiceImpl();
+//			List<Book> list = bs.selectAll();
+//			if (list != null && list.size() > 0) {
+//				request.setAttribute("book_mes", list);
+//				request.getRequestDispatcher("book_manager_index.jsp").forward(request, response);
+//			} else {
+//				System.out.println("书籍为空");
+//			}
+//			String Page = request.getParameter("page");
+//			int currentPage;
+//			//图书信息分页查询，不能显示全部图书信息，需要显示每页信息；
+//			//第一步每页需要显示，1总页数，当前页数，本页包含的图书信息，每页的展示条数
+//			//创建每页显示的对象
+			BookPageMes bp = new BookPageMes();
+//			if (Page != null) {
+//				currentPage = Integer.parseInt(Page);
+//			} else {
+//				currentPage = 1;
+//			}
+			int currentPage = 1;
+			//按照当前页码查询图书信息
+			BookService bs = new BookServiceImpl();
+			List<Book> listPage = bs.selectByPage(currentPage);
+			//获取总页数
+			List<Book> all = bs.selectByPage(0);//查询中数据
+			int pageNum;
+			if (all.size() % BookPageMes.PAGEBOOKNUM == 0) {
+				pageNum = all.size() / BookPageMes.PAGEBOOKNUM;
+			} else {
+				pageNum = all.size() / BookPageMes.PAGEBOOKNUM + 1;
+			}
+			//装到bookpagemes对象，打包到前端
+			bp.setBookMes(listPage);
+			bp.setCurrentPage(currentPage);
+			bp.setPageNum(pageNum);
+			bp.setBookNum(all.size());
+			request.setAttribute("bookMes",bp);
+			request.getRequestDispatcher("book_manager_index.jsp").forward(request, response);
+			
+		} else {
+			String alert = "添加失败，日期格式为1999-12-12";
+			request.setAttribute("alert", alert);
+			request.getRequestDispatcher("book_insert.jsp").forward(request, response);
+		}
+	}
+
+	private void doIndexUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO  查询所有图书数据信息 返回用户
+//		BookService bs = new BookServiceImpl();
+//		List<Book> list = bs.selectAll();
+//		if (list != null && list.size() > 0) {
+//			request.setAttribute("book_mes", list);
+//			request.getRequestDispatcher("book_user_index.jsp").forward(request, response);
+//		} else {
+//			System.out.println("书籍为空");
+//		}
+		
+				//接收jsp传来的page数据
+				String Page = request.getParameter("page");
+				int currentPage;
+				//图书信息分页查询，不能显示全部图书信息，需要显示每页信息；
+				//第一步每页需要显示，1总页数，当前页数，本页包含的图书信息，每页的展示条数
+				//创建每页显示的对象
+				BookPageMes bp = new BookPageMes();
+				if (Page != null) {
+					currentPage = Integer.parseInt(Page);
+				} else {
+					currentPage = 1;
+				}
+				
+				//按照当前页码查询图书信息
+				BookService bs = new BookServiceImpl();
+				List<Book> listPage = bs.selectByPage(currentPage);
+				//获取总页数
+				List<Book> all = bs.selectByPage(0);//查询中数据
+				int pageNum;
+				if (all.size() % BookPageMes.PAGEBOOKNUM == 0) {
+					pageNum = all.size() / BookPageMes.PAGEBOOKNUM;
+				} else {
+					pageNum = all.size() / BookPageMes.PAGEBOOKNUM + 1;
+				}
+				//装到bookpagemes对象，打包到前端
+				bp.setBookMes(listPage);
+				bp.setCurrentPage(currentPage);
+				bp.setPageNum(pageNum);
+				bp.setBookNum(all.size());
+				request.setAttribute("bookMes",bp);
+				request.getRequestDispatcher("book_user_index.jsp").forward(request, response);
+	}
+
+	private void doIndexManager(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		// TODO 查询所有图书数据信息 返回管理端
+//		BookService bs = new BookServiceImpl();
+//		List<Book> list = bs.selectAll();
+//		if (list != null && list.size() > 0) {
+//			request.setAttribute("book_mes", list);
+//			request.getRequestDispatcher("book_manager_index.jsp").forward(request, response);
+//		} else {
+//			System.out.println("书籍为空");
+//		}
+		
+		//接收jsp传来的page数据
+		String Page = request.getParameter("page");
+		int currentPage;
+		//图书信息分页查询，不能显示全部图书信息，需要显示每页信息；
+		//第一步每页需要显示，1总页数，当前页数，本页包含的图书信息，每页的展示条数
+		//创建每页显示的对象
+		BookPageMes bp = new BookPageMes();
+		if (Page != null) {
+			currentPage = Integer.parseInt(Page);
+		} else {
+			currentPage = 1;
+		}
+		
+		//按照当前页码查询图书信息
+		BookService bs = new BookServiceImpl();
+		List<Book> listPage = bs.selectByPage(currentPage);
+		//获取总页数
+		List<Book> all = bs.selectByPage(0);//查询中数据
+		int pageNum;
+		if (all.size() % BookPageMes.PAGEBOOKNUM == 0) {
+			pageNum = all.size() / BookPageMes.PAGEBOOKNUM;
+		} else {
+			pageNum = all.size() / BookPageMes.PAGEBOOKNUM + 1;
+		}
+		//装到bookpagemes对象，打包到前端
+		bp.setBookMes(listPage);
+		bp.setCurrentPage(currentPage);
+		bp.setPageNum(pageNum);
+		bp.setBookNum(all.size());
+		request.setAttribute("bookMes",bp);
+		request.getRequestDispatcher("book_manager_index.jsp").forward(request, response);
+	}
+
+}

@@ -1,0 +1,31 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<input type="button" onclick="toexcel()"  value="一键导出"/>
+
+</body>
+<script type="text/javascript" src="js/jquery-1.11.2.js"></script>
+<script>
+	function toexcel() {
+		//ajax引擎
+		$.ajax({
+			url : "BookToExcelServlet",  //请求路径
+			type : "post",     //请求方式 post和get两种
+			data : {flag : "toexcel"},//要传额数据，json数据，通过键值对的方式
+			dataType : "text",  //预计返回的数据，一般为json数据  html text xml类型
+			success : function(data){   //后台无异常的回调函数
+				alert(data)
+			},
+			error : function(data){   //后台有异常的回调函数
+				alert("导出失败");
+			}
+		})
+	}
+</script>
+</html>

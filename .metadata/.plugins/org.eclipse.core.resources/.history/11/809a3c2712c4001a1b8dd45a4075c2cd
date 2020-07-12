@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xue.dao.BookDao">
+	
+	<select id="findBookDynamic" resultType="com.xue.model.Book">
+		
+		select 
+			no, 
+			name,
+			author, 
+			publish,
+			price,
+			store
+		from book
+		<where>
+			<if test="id != null and id != ''">
+				no like "%" #{id} "%"
+			</if>
+			<if test="name != null and name != ''">
+				and name like "%" #{name} "%"
+			</if>
+		</where>
+		<if test="endCount != 0">
+			limit #{startCount},#{endCount}
+		</if>
+	
+	</select>
+
+
+
+</mapper>

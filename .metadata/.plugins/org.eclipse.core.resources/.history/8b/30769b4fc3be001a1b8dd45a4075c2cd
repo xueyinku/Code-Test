@@ -1,0 +1,21 @@
+package com.xue.dao;
+
+import com.xue.model.Book;
+
+public interface BookDao {
+
+	//代理接口！
+	//告诉Mybits该代理哪些SQl功能!、
+	//要求：定义增删改查代理方法时，返回值类型必须是int或者void
+	//添加语句(代理添加)
+	int insertBook(Book book);
+	//Mybits具体代理的代码再XML文件中写(要求xml文件必须与代理接口文件名称相同)
+	//修改语句(代理修改)
+	
+	
+	//删除语句(代理删除)
+	
+	
+	//查询语句(代理查询)
+	
+}

@@ -1,0 +1,41 @@
+package com.xue.controller;
+
+import java.util.Map;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.xue.model.Book;
+import com.xue.model.BookPageMes;
+import com.xue.service.BookService;
+import com.xue.service.Impl.BookServiceImpl;
+
+@Controller
+@RequestMapping("BookController")
+public class BookController {
+	@RequestMapping("goindex")
+	public String goindex(Map<String, BookPageMes> map) {
+		//查询每页的图书信息发送到bookindex页面中
+		//查询当页所有book信息
+		BookService bs = new BookServiceImpl();
+		BookPageMes result = bs.selectBookByPage(1);
+		map.put("BookMes", result);
+		return "book_index";
+	}
+	@RequestMapping("goinsert")
+	public String goinsert() {
+		return "book_insert";
+	}
+	@RequestMapping("goinsertok")
+	public String goinsertok(Book book, Map<String, Object> map) {
+		//调业务层的方法，向数据库中增加book数据
+		BookService bs = new BookServiceImpl();
+		boolean result = bs.insertBook(book);
+		if (result) {
+			return "book_index";
+		} else {
+			map.put("mes", "增加失败");
+			return "book_insert";
+		}
+	}
+}

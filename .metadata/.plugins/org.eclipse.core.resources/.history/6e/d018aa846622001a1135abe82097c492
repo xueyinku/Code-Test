@@ -1,0 +1,33 @@
+package com.xue.study.LinkedList;
+
+
+
+public class ListNode {
+	 int val;
+	 ListNode next;
+	 ListNode(int x) { val = x; }
+	 
+	 //测试的时候不能创建链表listNode,所以需要创建构造方法和tostring方法
+	 public ListNode(int[] arr) {
+		 if (arr.length == 0 || arr == null) {
+			throw new IllegalArgumentException("arr can not be empty.");
+		}
+		 this.val = arr[0];
+		 ListNode cur = this;
+		 for (int i = 1; i < arr.length; i++) {
+			cur.next = new ListNode(arr[i]);
+			cur = cur.next;
+		}
+	 }
+	 @Override
+	 public String toString() {
+		 StringBuilder ret = new StringBuilder();
+		 ListNode head = this;
+		 ret.append(this.val);
+		 while (head.next != null) {
+			ret.append("->" + head.val);
+			head = head.next;
+		}
+		 return ret.toString();
+	 }
+}

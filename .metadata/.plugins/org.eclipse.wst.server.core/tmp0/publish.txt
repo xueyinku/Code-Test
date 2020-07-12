@@ -1,0 +1,7 @@
+#Tomcat publish data
+#Sun Jul 12 18:27:16 CST 2020
+org.eclipse.jst.jee.server\:/binary\:D\:\\EclipseJavaEE\\SSM\\WebContent\\WEB-INF\\lib\\log4j-core-2.0-rc1.jar=WEB-INF/lib/log4j-core-2.0-rc1.jar
+org.eclipse.jst.jee.server\:/binary\:D\:\\EclipseJavaEE\\SSM\\WebContent\\WEB-INF\\lib\\spring-web-4.0.5.RELEASE.jar=WEB-INF/lib/spring-web-4.0.5.RELEASE.jar
+org.eclipse.jst.jee.server\:/binary\:D\:\\EclipseJavaEE\\\u6587\u4EF6\u4E0A\u4F20Demo\\WebContent\\WEB-INF\\lib\\log4j-core-2.0-rc1.jar=WEB-INF/lib/log4j-core-2.0-rc1.jar
+org.eclipse.jst.jee.server\:/binary\:D\:\\EclipseJavaEE\\\u6587\u4EF6\u4E0A\u4F20Demo\\WebContent\\WEB-INF\\lib\\spring-web-4.0.0.RELEASE.jar=WEB-INF/lib/spring-web-4.0.0.RELEASE.jar
+org.eclipse.jst.jee.server\:/binary\:D\:\\EclipseJavaEE\\Mybatis20200712\\WebContent\\WEB-INF\\lib\\log4j-core-2.0-rc1.jar=WEB-INF/lib/log4j-core-2.0-rc1.jar

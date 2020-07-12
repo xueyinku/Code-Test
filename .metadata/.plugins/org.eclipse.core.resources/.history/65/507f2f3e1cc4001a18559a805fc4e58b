@@ -1,0 +1,11 @@
+package com.asjy.dao;
+
+import java.util.List;
+
+import com.asjy.model.Teacher;
+
+public interface TeacherDao {
+
+	//代理的查询所有老师和学生的方法
+	List<Teacher> findTeaAndStu();
+}

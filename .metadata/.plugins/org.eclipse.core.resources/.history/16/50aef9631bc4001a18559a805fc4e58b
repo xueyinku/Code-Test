@@ -1,0 +1,5 @@
+package com.xue.model;
+
+public class Student {
+	private int id
+}

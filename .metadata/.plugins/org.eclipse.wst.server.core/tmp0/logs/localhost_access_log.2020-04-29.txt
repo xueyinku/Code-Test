@@ -1,0 +1,5 @@
+127.0.0.1 - - [29/Apr/2020:08:19:56 +0800] "GET / HTTP/1.1" 404 1044
+127.0.0.1 - - [29/Apr/2020:08:19:59 +0800] "GET /book_project/book_buy.jsp HTTP/1.1" 500 2882
+127.0.0.1 - - [29/Apr/2020:08:20:20 +0800] "GET /book_project/book_login.jsp HTTP/1.1" 200 2303
+127.0.0.1 - - [29/Apr/2020:08:20:21 +0800] "GET /book_project/css/customer_btn_and_text_style.css HTTP/1.1" 200 972
+127.0.0.1 - - [29/Apr/2020:08:20:23 +0800] "GET /book_project/ImgServlet HTTP/1.1" 200 1817

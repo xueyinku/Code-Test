@@ -1,0 +1,5 @@
+package com.xue.service.Impl;
+
+public class BookServiceImpl {
+
+}

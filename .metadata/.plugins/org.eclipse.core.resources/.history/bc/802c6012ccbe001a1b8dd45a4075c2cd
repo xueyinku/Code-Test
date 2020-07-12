@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.xue.dao.BookDao">
+	<!-- 
+		Mybatis中所有的内容写在mapper标签中！
+		namespace属性：命名空间(映射代理接口)(写的是代理接口的全类名：包名+类名)
+	 -->
+	<insert id="insertBook" parameterType="Book">
+		<!-- 
+			id属性：映射对应的代理方法(方法名)
+			parameterType属性：映射对应代理方法的参数类型(全类名)
+		 -->
+		insert into book values(default, #{name}, #{author}, #{price})
+		<!-- 
+			Mybatis编写SQL语句时，通过#{占位符赋值内容}当作占位符
+			注意：当参数是实体类对象时，需要靠对象的成员变量给占位符赋值，大括号中只需要写实体类成员变量名即可！
+		 -->
+	</insert>
+</mapper>

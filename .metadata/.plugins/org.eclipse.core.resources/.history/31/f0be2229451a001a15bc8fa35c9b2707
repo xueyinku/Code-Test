@@ -1,0 +1,38 @@
+package com.xue.study.DataArray;
+
+public class Array {
+	private int[] data;//data数组
+	private int size; //数组中存放的有效数据个数
+
+	// 构造方法，该方法是用户需要多少容量的数组就定义多大的数组 (capacity = input)
+	public Array(int capacity) { 
+		data = new int[capacity];
+		size = 0;
+	}
+	//无参数构造方法，初始化为10个长度的数组(capacity = 10)
+	public Array() { 
+		this(10);
+	}
+	
+	public Array(int...num ) { 
+		data = new int[num.length];
+		for (int i : num) 
+			data[i] = i;
+		size = num.length;
+	}
+	//获取数组元素个数
+	public int getSize() {
+		return size;
+	}
+	
+	//获取数组容量
+	public int getCapacity() {
+		return data.length;
+	}
+	
+	//数组是否为空
+	public boolean isEmpty() {
+		return size == 0;
+	}
+
+}
